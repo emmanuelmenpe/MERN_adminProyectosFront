@@ -12,7 +12,7 @@ const ListadoProyecto = () => {
     obtenerProyectos();
    },[]);
 
-   if (proyectos.length ===0)return null;
+   if (proyectos.length ===0)return <h3>No tiene proyectos aún.</h3>;
    
     return (
         <ul className='listado-proyectos'>
