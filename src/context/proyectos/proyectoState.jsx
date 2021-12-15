@@ -1,3 +1,7 @@
+/**
+ * definicion del estado y funciones que lo alteran 
+ */
+
 import React,{useReducer} from "react";
 import proyectoConstext from "./proyectoContext";
 import proyectoReducer from "./proyectoReducer";
@@ -27,9 +31,15 @@ const ProyectoState = (props) => {
     }
 
     //Dispatch para ejecutar las acciones 
+    //const[state, funcionDelHook] = useReducer(FuncionesAEjecutar, EstadoInicialDeApp);
     const[state, dispatch] = useReducer(proyectoReducer, initialState);
 
-    //funciones CRUD
+    /**
+     * a dispatch se le envia un objeto
+     * payload es por donde se envian los datos
+     */
+
+    //mostrar formulario
     const mostrarFormulario = () => {
         dispatch({
             type: FORMULARIO_PROYECTO
@@ -44,7 +54,7 @@ const ProyectoState = (props) => {
         })
     }
 
-    //agreagr proyecto
+    //agreagar proyecto
     const agregarProyecto = (proyectos) => {
         proyectos.id = uuidv4();
         dispatch({
@@ -77,8 +87,11 @@ const ProyectoState = (props) => {
     }
 
     return(
-        <proyectoConstext.Provider
-            value={{
+        /**
+         * todos los componentes dentro del context podran acceder al estado al estado definido
+         */
+        <proyectoConstext.Provider//.Provider parmite que solo los hijos accedan a las funciones y estado
+            value={{//define que podran recibir o acceder los componentes hijos
                 proyectos: state.proyectos,
                 formulario: state.formulario,
                 errorFormulario: state.errorFormulario,
@@ -91,7 +104,7 @@ const ProyectoState = (props) => {
                 eliminarProyecto
             }}    
         >
-            {props.children}
+            {props.children}//son los componentes dentro de este componente
         </proyectoConstext.Provider>
     )
 }

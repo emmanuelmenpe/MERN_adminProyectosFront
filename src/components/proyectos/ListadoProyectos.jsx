@@ -4,8 +4,8 @@ import proyectoConstext from '../../context/proyectos/proyectoContext';
 
 const ListadoProyecto = () => {
    //obtener el proyectos del state inicial 
-   const proyetosContext = useContext(proyectoConstext);
-   const {proyectos, obtenerProyectos} = proyetosContext;
+   const proyetosContext = useContext(proyectoConstext);//almacena todos los estados y funciones 
+   const {proyectos, obtenerProyectos} = proyetosContext;// obtiene estados o funciones que se necesita
 
    //obtenerProyectos cuando carga el componente
    useEffect (()=>{

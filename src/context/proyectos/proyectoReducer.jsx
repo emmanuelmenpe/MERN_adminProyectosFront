@@ -6,13 +6,16 @@ import {
     PROYECTO_ACTUAL,
     ELIMINAR_PROYECTO
 } from "../../types";
-
+// funcion que recibe el estado de la app y la accion a ejecutar
 export default (state, action) => {
+    /**
+     * action.payload contiene los datos recibidos
+     */
     switch(action.type){
         case FORMULARIO_PROYECTO:
-            return{
-                ...state,
-                formulario:true
+            return{//retorna un objeto con...
+                ...state,//copia de todo es estado (ProyectoState)
+                formulario:true//cambia un valor del estado
             }
         case OBTENER_PROYETCOS:
             return{
