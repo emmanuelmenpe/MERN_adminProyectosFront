@@ -1,11 +1,16 @@
 import react, {useReducer} from "react";
 import tareaConstext from './tareaContext';
 import tareaReducer from './tareaReducer';
+import { v4 as uuidv4 } from "uuid";
 import {
     TAREAS_PROYECTOS,
     AGREGAR_TAREA,
     VALIDAR_TAREA,
-    ELIMINAR_TAREA
+    ELIMINAR_TAREA,
+    ESTADO_TAREA,
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA,
+    LIMPIAR_TAREA
 } from '../../types/index';
 
 const TareaState = (props) => {
@@ -18,7 +23,8 @@ const TareaState = (props) => {
             {id:4, nombre: 'tarea4', estado:false, proyectoId:3},
         ],
         tareasProyecto: null,
-        errorTarea:false
+        errorTarea:false,
+        tareaSeleccionada: null
     }
 
     const[state, dispatch] = useReducer(tareaReducer, initialState);
@@ -33,6 +39,7 @@ const TareaState = (props) => {
 
     //agregar tarea
     const agregarTarea = (nuevaTarea) => {
+        nuevaTarea.id = uuidv4();
         dispatch({
             type: AGREGAR_TAREA,
             payload: nuevaTarea
@@ -54,16 +61,52 @@ const TareaState = (props) => {
         })
     }
 
+    //cambiar el estado de tarea a completo o incompleto
+    const cambiarEstadoTarea = (tarea) => {
+        dispatch({
+            type: ESTADO_TAREA,
+            payload: tarea
+        })
+    }
+
+    //extraer tarea para edicion
+    const guardarTareaActual = (tarea) => {
+        dispatch({
+            type: TAREA_ACTUAL,
+            payload: tarea
+        })
+    }
+
+    //edita tarea
+    const actualizarTarea = (tarea) => {
+        dispatch({
+            type: ACTUALIZAR_TAREA,
+            payload: tarea
+        })
+    }
+
+    //elimina tarea seleccionada despues de actualizar
+    const limpiarTarea = () => {
+        dispatch({
+            type: LIMPIAR_TAREA,
+        })
+    }
+
     return( 
         <tareaConstext.Provider
             value={{
                 tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
                 errorTarea: state.errorTarea,
+                tareaSeleccionada: state.tareaSeleccionada,
                 obtenerTareas,
                 agregarTarea,
                 validarTarea,
                 eliminarTarea,
+                cambiarEstadoTarea,
+                guardarTareaActual,
+                actualizarTarea,
+                limpiarTarea
             }}
         >
             {props.children}

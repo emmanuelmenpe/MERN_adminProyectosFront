@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import proyectoConstext from '../../context/proyectos/proyectoContext';
 import tareaConstext from '../../context/tareas/tareaContext';
 
@@ -16,7 +16,25 @@ const FormTarea = () => {
 
     //obtener state de tarea
     const tareaContext = useContext(tareaConstext);
-    const { errorTarea, agregarTarea, validarTarea, obtenerTareas } = tareaContext;
+    const { 
+        errorTarea, 
+        tareaSeleccionada, 
+        agregarTarea, 
+        validarTarea, 
+        obtenerTareas,
+        actualizarTarea,
+        limpiarTarea } = tareaContext;
+
+    //detecta si hay tarea seleccionada
+    useEffect(() => {
+        if (tareaSeleccionada !== null) {
+            setTarea(tareaSeleccionada)
+        }else{
+            setTarea({
+                nombre:''
+            })
+        }
+    }, [tareaSeleccionada])
 
     //si no hay proyecto seleccionado 
     if (!proyecto) {
@@ -41,12 +59,19 @@ const FormTarea = () => {
             return;
         }
 
-        tarea.proyectoId = proyectoActual.id;
-        tarea.estado = false;
-        agregarTarea(tarea);
-        setTarea({nombre:''})
-        obtenerTareas(proyectoActual.id)
+        //edicion o nueva tarea
+        if (tareaSeleccionada === null) {
+            tarea.proyectoId = proyectoActual.id;
+            tarea.estado = false;
+            agregarTarea(tarea);
+        }else {
+            actualizarTarea(tarea);
+            //eliminar tarea seleccionada despues de actualizar
+            limpiarTarea();
+        }
 
+        setTarea({nombre:''});
+        obtenerTareas(proyectoActual.id);
     }
 
     return (
@@ -66,15 +91,15 @@ const FormTarea = () => {
                 <div className="contenedor-input">
                     <input 
                         type="submit" 
-                        value="Agregar tarea" 
+                        value= {tareaSeleccionada? "Guardar cambios" : "Agregar tarea"}
                         className='btn btn-primario btn-block'
                     />
                 </div>
             </form>
             {   errorTarea? 
-                <p className="mensaje error">Ingrese nombre de tarea</p>
+                    <p className="mensaje error">Ingrese nombre de tarea</p>
                 : 
-                null
+                    null
             }
         </div>
     )
