@@ -18,7 +18,9 @@ export default (state, action) => {
                 autenticado: true,
                 mensaje:null
             }
+        case LOGIN_ERROR:
         case REGISTRO_ERROR:
+            localStorage.removeItem('token');
             return{
                 ...state,
                 token:null,
@@ -26,13 +28,10 @@ export default (state, action) => {
             }
         case OBTENER_USUARIO:
             return{
-                ...state
+                ...state,
+                usuario:action.payload
             }
         case LOGIN_EXITOSO:
-            return{
-                ...state
-            }
-        case LOGIN_ERROR:
             return{
                 ...state
             }
