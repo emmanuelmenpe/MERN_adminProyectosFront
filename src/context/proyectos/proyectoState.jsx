@@ -104,7 +104,7 @@ const ProyectoState = (props) => {
                 eliminarProyecto
             }}    
         >
-            {props.children}//son los componentes dentro de este componente
+            {props.children}{/*son los componentes dentro de este componente*/}
         </proyectoConstext.Provider>
     )
 }

@@ -1,4 +1,4 @@
-import react, {useReducer} from "react";
+import React, {useReducer} from "react";
 import tareaConstext from './tareaContext';
 import tareaReducer from './tareaReducer';
 import { v4 as uuidv4 } from "uuid";
