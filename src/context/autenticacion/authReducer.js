@@ -10,12 +10,19 @@ import {
 export default (state, action) => {
     switch (action.type) {
         case REGISTRO_EXITOSO:
+            //almacenar token en localStorage
+            console.log(action.payload.token);
+            localStorage.setItem('token',action.payload.token);
             return{
-                ...state
+                ...state,
+                autenticado: true,
+                mensaje:null
             }
         case REGISTRO_ERROR:
             return{
-                ...state
+                ...state,
+                token:null,
+                mensaje: action.payload
             }
         case OBTENER_USUARIO:
             return{
