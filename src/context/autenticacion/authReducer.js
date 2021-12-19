@@ -9,9 +9,10 @@ import {
 
 export default (state, action) => {
     switch (action.type) {
+        case LOGIN_EXITOSO:
         case REGISTRO_EXITOSO:
             //almacenar token en localStorage
-            console.log(action.payload.token);
+            //console.log(action.payload.token);
             localStorage.setItem('token',action.payload.token);
             return{
                 ...state,
@@ -30,10 +31,6 @@ export default (state, action) => {
             return{
                 ...state,
                 usuario:action.payload
-            }
-        case LOGIN_EXITOSO:
-            return{
-                ...state
             }
         case CERRAR_SESION:
             return{

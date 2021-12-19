@@ -47,6 +47,7 @@ const AuthState = (props) => {
         }
     }
 
+    //buscar usuario autenticado
     const usuarioAutenticado = async() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -69,6 +70,31 @@ const AuthState = (props) => {
         }
     }
 
+    //inicio sesion de usuario
+    const iniciarSesion = async(datos) => {
+        //console.log(datos);
+        try {
+            const respuesta = await clienteAxios.post('/api/auth', datos);
+            //console.log(respuesta);
+            dispatch({
+                type:LOGIN_EXITOSO,
+                payload:respuesta.data
+            });
+            //obtener usuario
+            usuarioAutenticado();
+        } catch (error) {
+            console.log(error);
+            const alerta = {
+                msg:error.response.data.msg,
+                categoria:'alerta-error'
+            }
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
     return(
         <authContext.Provider
             value={{
@@ -76,8 +102,9 @@ const AuthState = (props) => {
                 autenticado:state.autenticado,
                 usuario:state.usuario,
                 mensaje:state.mensaje,
+                usuarioAutenticado,
                 registrarUsuario,
-                usuarioAutenticado
+                iniciarSesion
             }}
         >
             {props.children}

@@ -12,7 +12,14 @@ import AuthState from './context/autenticacion/authState';
 
 //Switch is now Routes
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import tokenAuth from './config/token';
 
+//revisar si hay un token
+const token = localStorage.getItem('token');
+
+if (token) {
+  tokenAuth(token)
+}
 
 function App() {
   return (
