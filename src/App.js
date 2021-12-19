@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/auth/Login';
 import NuevaCuenta from './components/auth/NuevaCuenta';
 import Proyectos from './components/proyectos/Proyectos';
+import RutaPrivada from './components/rutas/RutaPrivada';
 
 //importar estados de app
 import ProyectoState from './context/proyectos/proyectoState';
@@ -31,7 +32,7 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Login/>} />
                 <Route exact path="/nueva-cuenta" element={<NuevaCuenta/>} />
-                <Route exact path="/proyectos" element={<Proyectos/>} />
+                <Route exact path="/proyectos" element={<RutaPrivada><Proyectos/></RutaPrivada>} />
               </Routes>
             </Router>
           </AuthState>

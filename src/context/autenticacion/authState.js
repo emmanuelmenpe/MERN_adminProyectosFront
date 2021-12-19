@@ -17,7 +17,8 @@ const AuthState = (props) => {
         token:localStorage.getItem('token'),
         autenticado: null,
         usuario:null,
-        mensaje:null
+        mensaje:null,
+        cargando:true//para solucionar el pantallazo que se ve de inicio de sesion y despues el panel cuando recarga el navegador
     }
 
     const[state, dispatch] = useReducer(authReducer, inicialState);
@@ -95,6 +96,13 @@ const AuthState = (props) => {
         }
     }
 
+    //cerrar sesion 
+    const cerrarSesion = () => {
+        dispatch({
+            type:CERRAR_SESION
+        })
+    }
+
     return(
         <authContext.Provider
             value={{
@@ -102,9 +110,11 @@ const AuthState = (props) => {
                 autenticado:state.autenticado,
                 usuario:state.usuario,
                 mensaje:state.mensaje,
+                cargando:state.cargando,
                 usuarioAutenticado,
                 registrarUsuario,
-                iniciarSesion
+                iniciarSesion,
+                cerrarSesion
             }}
         >
             {props.children}
