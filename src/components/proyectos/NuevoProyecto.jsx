@@ -1,9 +1,9 @@
 import React, {Fragment, useState,useContext} from 'react'
-import proyectoConstext from '../../context/proyectos/proyectoContext';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const NuevoProyecto = () => {
     //obtener el state del formulario 
-    const proyetosContext = useContext(proyectoConstext);
+    const proyetosContext = useContext(proyectoContext);
     const {formulario,errorFormulario, mostrarFormulario, agregarProyecto, mostrarError} = proyetosContext;
 
     const [proyecto, setProyecto] = useState({
