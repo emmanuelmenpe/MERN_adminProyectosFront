@@ -2,7 +2,7 @@
 
 Aplicación hecha con ReactJS para implementación del frontend para poder registrarse como usuario y crear proyectos que contendrán tareas y poder aplicarles el CRUD, ésta app consume una API REST que está alojada en esta misma cuenta de gitHub.
 
-## Instalación depandencias
+## Instalación dependencias
 
 Tener instalado nodeJS, acceder al proyecto desde la terminal y ejecutar **npm install**.
 
