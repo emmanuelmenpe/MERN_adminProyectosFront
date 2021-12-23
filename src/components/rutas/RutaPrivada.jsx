@@ -1,5 +1,5 @@
 import React,{useContext, useEffect} from "react";
-import {Route, Navigate} from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import authContext from "../../context/autenticacion/authContext";
 
 //componente que recibe un componente dentro de el
@@ -11,6 +11,7 @@ const RutaPrivada = ({children}) => {
 
     useEffect(()=>{
         usuarioAutenticado();
+        //eslint-disable-next-line
     },[])
 
     return(

@@ -8,7 +8,7 @@ import {
     PROYECTO_ERROR
 } from "../../types";
 // funcion que recibe el estado de la app y la accion a ejecutar
-export default (state, action) => {
+const proyectoReducer = (state, action) => {
     /**
      * action.payload contiene los datos recibidos
      */
@@ -19,7 +19,6 @@ export default (state, action) => {
                 formulario:true//cambia un valor del estado
             }
         case OBTENER_PROYETCOS:
-            console.log(action.payload);
             return{
                 ...state,
                 proyectos: action.payload
@@ -55,3 +54,5 @@ export default (state, action) => {
         default: return state;
     }
 }
+
+export default proyectoReducer;

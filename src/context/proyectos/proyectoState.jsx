@@ -50,7 +50,6 @@ const ProyectoState = (props) => {
     const obtenerProyectos = async() => {
         try {
             const resultado = await clienteAxios.get('/api/proyectos');
-            //console.log(resultado);
 
             dispatch({
                 type: OBTENER_PROYETCOS,
@@ -72,12 +71,11 @@ const ProyectoState = (props) => {
     const agregarProyecto = async(proyecto) => {
         try {
             const resultado = await clienteAxios.post('/api/proyectos', proyecto);
-            //console.log(resultado);
+
             dispatch({
                 type: AGREGAR_PROYECTO,
                 payload: resultado.data
             })
-            obtenerProyectos()
         } catch (error) {
             const alerta={
                 msg:'hubo un error al agregar proyecto',

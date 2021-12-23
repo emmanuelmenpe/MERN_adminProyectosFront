@@ -4,7 +4,7 @@ import proyectoContext from '../../context/proyectos/proyectoContext';
 const NuevoProyecto = () => {
     //obtener el state del formulario 
     const proyetosContext = useContext(proyectoContext);
-    const {formulario,errorFormulario, mostrarFormulario, agregarProyecto, mostrarError} = proyetosContext;
+    const {formulario,errorFormulario, mostrarFormulario, agregarProyecto, mostrarError,obtenerProyectos} = proyetosContext;
 
     const [proyecto, setProyecto] = useState({
         nombre:'',
@@ -21,9 +21,10 @@ const NuevoProyecto = () => {
             return;
         }
 
-        agregarProyecto(proyecto)
+        agregarProyecto(proyecto);
 
-        setProyecto({nombre:''})
+        setProyecto({nombre:''});
+        obtenerProyectos();
     }
 
     const onChange = (e) => {
